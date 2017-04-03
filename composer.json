@@ -1,0 +1,29 @@
+{
+  "name": "agere/zfc-importer",
+  "description": "ZF2 Progress Module",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "progress",
+    "log",
+    "zf2",
+    "agere"
+  ],
+  "authors": [
+    {
+      "name": "Sergiy Popov",
+      "email": "popow.sergiy@gmail.com",
+      "homepage": "http://agere.com.ua/",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Agere\\ZfcProgress\\": "src/"
+    }
+  }
+}
