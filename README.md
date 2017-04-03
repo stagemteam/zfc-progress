@@ -133,10 +133,10 @@ Following execution rely on `Progress` module with has registered `EditListener`
 and which listen all events `['edit', 'change', 'sync'']` one of which run `Status` module.
 
 Also you simply can register custom event name if pre registered is inopportune:
-`
+```
 'progress' => [
     'listeners' => [
         Service\Api\InvoiceSoapService::class => ['syncInvoice'],
     ]
 ],
-`
+```
