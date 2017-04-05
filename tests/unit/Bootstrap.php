@@ -32,7 +32,7 @@ class Bootstrap
                 'module_paths' => $zf2ModulePaths,
             ],
             'modules' => [
-                'Agere\Progress',
+                'Agere\ZfcProgress',
                 'Magere\Users',
             ],
         ];

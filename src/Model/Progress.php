@@ -14,7 +14,7 @@ use Magere\Entity\Model\Module;
 use Magere\Users\Model\Users as User;
 
 /**
- * @ORM\Entity(repositoryClass="Agere\Progress\Model\Repository\ProgressRepository")
+ * @ORM\Entity(repositoryClass="Agere\ZfcProgress\Model\Repository\ProgressRepository")
  * @ORM\Table(name="progress", indexes={
  *  @ORM\Index(name="FK_ProgressEntityId", columns={"entityId", "itemId"}),
  *  @ORM\Index(name="FK_ProgressContextEntityId", columns={"contextId", "entityId", "itemId"})
