@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Agere\\ZfcProgress\\": "src/"
+      "Popov\\Project\\": "src/"
     }
   }
 }
