@@ -37,32 +37,29 @@ class Bootstrap
             ],
         ];
 
-
-
         // if NEED use full project configuration
-        #include $path . '/../init_autoloader.php';
-        #self::$config = include $path . '/../config/application.config.php';
-        #\Zend\Mvc\Application::init(self::$config);
-        #self::$sm = self::getServiceManager(self::$config);
+        // @see http://stackoverflow.com/a/22906423/1335142
+        #$config = include 'config/application.config.php';
+        #\Zend\Mvc\Application::init($config);
+        #$serviceManager = new ServiceManager(new ServiceManagerConfig());
+        #$serviceManager->setService('ApplicationConfig', $config);
+        #$serviceManager->get('ModuleManager')->loadModules();
+        #static::$serviceManager = self::getServiceManager(self::$config);
 
         // if DON'T NEED to use custom service manager
         $serviceManager = new ServiceManager(new ServiceManagerConfig());
         $serviceManager->setService('ApplicationConfig', $config);
         $serviceManager->get('ModuleManager')->loadModules();
-
         static::$serviceManager = $serviceManager;
 
         // if NEED to use custom service manager
         #$applicationConfig = require('../config/application.config.php.sample');
         #$config = ArrayUtils::merge($config, $applicationConfig);
-
         #$serviceManager = new ServiceManager(new ServiceManagerConfig($config['service_manager']));
         #$serviceManager->setService('ApplicationConfig', $config);
         #$serviceManager->get('ModuleManager')->loadModules();
         #static::$serviceManager = $serviceManager;
-
     }
-
 
     public static function chroot()
     {
