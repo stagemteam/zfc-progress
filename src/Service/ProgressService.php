@@ -69,7 +69,7 @@ class ProgressService extends DomainServiceAbstract
 
     }
 
-    public function getProgressByContext($item, ContextInterface $context)
+    public function getProgressByContext($item, $context)
     {
         $entity = $this->getEntities($item);
 
