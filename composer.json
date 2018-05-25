@@ -1,19 +1,19 @@
 {
-  "name": "agere/zfc-progress",
-  "description": "ZF2 Progress Module",
+  "name": "popov/zfc-progress",
+  "description": "ZF Progress Module",
   "type": "library",
   "license": "MIT",
   "keywords": [
     "progress",
     "log",
     "zf2",
-    "agere"
+    "zf3"
   ],
   "authors": [
     {
-      "name": "Sergiy Popov",
+      "name": "Serhii Popov",
       "email": "popow.sergiy@gmail.com",
-      "homepage": "http://agere.com.ua/",
+      "homepage": "http://stagem.com.ua/",
       "role": "Developer"
     }
   ],
@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Agere\\ZfcProgress\\": "src/"
+      "Popov\\ZfcProgress\\": "src/"
     }
   }
 }
