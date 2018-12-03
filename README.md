@@ -1,10 +1,10 @@
 # ZF2 Progress Module
 
-This module is part of Agere ecosystem and main goal is logging any change registered in `Context`.
+This module is part of Stagem ecosystem and main goal is logging any change registered in `Context`.
 
 ## Requirements
-* `Agere\Entity` module
-* `Agere\User` module
+* `Stagem\ZfcEntity` module
+* `Stagem\ZfcUser` module
 
 Logging principle is based on execution context. Conditionally realisation can describe follows (for different modules):
  - item status is changing in `Status Context`;
@@ -45,7 +45,7 @@ Module has `ContextInterface` for convenience realisation of custom logging **Co
 Suppose, you need implement logging in `Status` context.
 For this register new context in `Status` module and declare in services
 ```php
-namespace Agere\Status;
+namespace Stagem\ZfcStatus;
 
 'progress' => [
 	__NAMESPACE__ => [
@@ -58,7 +58,7 @@ namespace Agere\Status;
 	],
 	'delegators' => [
 		Service\Progress\StatusContext::class => [
-			\Agere\Translator\Service\Factory\TranslatorDelegatorFactory::class
+			\Stagem\Translator\Service\Factory\TranslatorDelegatorFactory::class
 		]
 	],
 ],
@@ -70,8 +70,8 @@ namespace Magere\Status\Service\Progress;
 
 use Zend\Mvc\I18n\Translator;
 use Zend\I18n\Translator\TranslatorAwareTrait;
-use Agere\Progress\Service\ContextInterface;
-use Magere\Status\Model\Status;
+use Stagem\ZfcProgress\Service\ContextInterface;
+use Stagem\ZfcStatus\Model\Status;
 
 /**
  * @method Translator getTranslator()
