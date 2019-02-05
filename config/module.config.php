@@ -1,13 +1,9 @@
 <?php
-namespace Agere\ZfcProgress;
+namespace Stagem\ZfcProgress;
 
 return [
 
-    'progress' => [
-        'listeners' => [
-            '*' => ['edit', 'change', 'sync'],
-        ]
-    ],
+    'event_manager' => require 'listener.config.php',
 
     'service_manager' => [
         'aliases' => [

@@ -7,10 +7,10 @@
  * @author Popov Sergiy <popov@agere.com.ua>
  * @datetime: 06.11.2016 13:36
  */
-namespace Agere\ZfcProgress\Service;
+namespace Stagem\ZfcProgress\Service;
 
 use Zend\I18n\Translator\TranslatorAwareInterface;
-use Magere\Users\Service\UserAwareInterface;
+use Popov\ZfcUser\Service\UserAwareInterface;
 
 interface ContextInterface extends UserAwareInterface, TranslatorAwareInterface
 {
@@ -49,4 +49,12 @@ interface ContextInterface extends UserAwareInterface, TranslatorAwareInterface
      * @return string
      */
     public function getMessage();
+
+    /**
+     * Progress description
+     *
+     * @return string
+     */
+    public function getDescription();
+
 }

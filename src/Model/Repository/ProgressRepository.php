@@ -1,9 +1,9 @@
 <?php
-namespace Agere\ZfcProgress\Model\Repository;
+namespace Stagem\ZfcProgress\Model\Repository;
 
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
-use Magere\Agere\ORM\EntityRepository;
+use Popov\ZfcCore\Model\Repository\EntityRepository;
 
 class ProgressRepository extends EntityRepository {
 

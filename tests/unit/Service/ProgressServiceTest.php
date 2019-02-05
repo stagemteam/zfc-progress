@@ -2,21 +2,21 @@
 /**
  * Progress Service Unit Test
  *
- * @category Agere
- * @package Agere_Progress
- * @author Popov Sergiy <popov@agere.com.ua>
+ * @category Stagem
+ * @package Stagem_Progress
+ * @author Popov Sergiy <popov@Stagem.com.ua>
  * @datetime: 24.03.2017 14:44
  */
-namespace AgereTest\Progress\Service;
+namespace StagemTest\Progress\Service;
 
-use Agere\ZfcProgress\Model\Progress;
-use Agere\ZfcProgress\Model\Repository\ProgressRepository;
-use AgereTest\Progress\Fake\ModelStub;
-use AgereTest\Progress\Fake\ProgressContextFake;
-use Magere\Entity\Controller\Plugin\EntityPlugin;
-use Magere\Entity\Controller\Plugin\ModulePlugin;
-use Magere\Entity\Model\Entity;
-use Magere\Entity\Model\Repository\EntityRepository;
+use Stagem\ZfcProgress\Model\Progress;
+use Stagem\ZfcProgress\Model\Repository\ProgressRepository;
+use StagemTest\Progress\Fake\ModelStub;
+use StagemTest\Progress\Fake\ProgressContextFake;
+use MStagem\Entity\Controller\Plugin\EntityPlugin;
+use MStagem\Entity\Controller\Plugin\ModulePlugin;
+use MStagem\Entity\Model\Entity;
+use MStagem\Entity\Model\Repository\EntityRepository;
 use Mockery;
 use Zend\Stdlib\Exception;
 use Zend\ServiceManager\ServiceManager;
@@ -25,9 +25,9 @@ use Doctrine\ORM\QueryBuilder;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\Event;
-use Agere\Current\Plugin\Current as CurrentPlugin;
-use Agere\ZfcProgress\Listener\EditListener;
-use Agere\ZfcProgress\Service\ProgressService;
+use Stagem\Current\Plugin\Current as CurrentPlugin;
+use Stagem\ZfcProgress\Listener\EditListener;
+use Stagem\ZfcProgress\Service\ProgressService;
 
 class ProgressServiceTest extends TestCase
 {
@@ -68,7 +68,7 @@ class ProgressServiceTest extends TestCase
 
     /*public function getConfig()
     {
-        return include 'module/Agere/Progress/config/module.config.php';
+        return include 'module/Stagem/Progress/config/module.config.php';
     }*/
 
     public function testGetProgress()
@@ -79,7 +79,7 @@ class ProgressServiceTest extends TestCase
             ->getMock()
 
             ->shouldReceive('getContext')
-            ->andReturn('AgereTest\Progress')
+            ->andReturn('StagemTest\Progress')
             ->getMock();
 
         $this->prepareEntityRepository();
@@ -100,7 +100,7 @@ class ProgressServiceTest extends TestCase
             ->getMock()
 
             ->shouldReceive('getContext')
-            ->andReturn('AgereTest\Progress')
+            ->andReturn('StagemTest\Progress')
             ->getMock();
 
         $this->prepareEntityRepository();
@@ -118,8 +118,8 @@ class ProgressServiceTest extends TestCase
 
     public function testStandardWorkflowOfWriteProgress()
     {
-        $contextMock = Mockery::mock('Magere\Entity\Model\Module');
-        $entityMock = Mockery::mock('Magere\Entity\Model\Entity');
+        $contextMock = Mockery::mock('MStagem\Entity\Model\Module');
+        $entityMock = Mockery::mock('MStagem\Entity\Model\Entity');
 
         $this->modulePluginMock->shouldReceive('setRealContext')
             ->andReturnSelf()
@@ -162,10 +162,10 @@ class ProgressServiceTest extends TestCase
 
     protected function prepareEntityRepository()
     {
-        $entityMock = Mockery::mock('Magere\Entity\Model\Entity');
+        $entityMock = Mockery::mock('MStagem\Entity\Model\Entity');
         $entityRepositoryMock = Mockery::mock('alias:' . EntityRepository::class)
             ->shouldReceive('findBy')
-            ->with(['namespace' => ['AgereTest\Progress']])
+            ->with(['namespace' => ['StagemTest\Progress']])
             ->andReturn($entityMock)
             ->getMock();
 

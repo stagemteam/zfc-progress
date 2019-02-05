@@ -1,13 +1,12 @@
 <?php
-namespace Agere\ZfcProgress\Service;
+namespace Stagem\ZfcProgress\Service;
 
-use Agere\Core\Service\DomainServiceAbstract;
-use Magere\Entity\Controller\Plugin\ModulePlugin;
-use Agere\ZfcProgress\Model\Repository\ProgressRepository;
-use Agere\ZfcProgress\Model\Progress;
-use Magere\Entity\Model\Module;
-use Magere\Entity\Model\Entity;
-use Magere\Users\Model\Users as User;
+use Popov\ZfcEntity\Helper\ModuleHelper;
+use Popov\ZfcCore\Service\DomainServiceAbstract;
+use Stagem\ZfcProgress\Model\Repository\ProgressRepository;
+use Stagem\ZfcProgress\Model\Progress;
+use Popov\ZfcEntity\Model\Module;
+use Popov\ZfcEntity\Model\Entity;
 
 class ProgressService extends DomainServiceAbstract
 {
@@ -15,10 +14,10 @@ class ProgressService extends DomainServiceAbstract
 
     //protected $user;
 
-    /** @var ModulePlugin */
+    /** @var ModuleHelper */
     protected $modulePlugin;
 
-    public function __construct(/*$user, */ModulePlugin $modulePlugin)
+    public function __construct(/*$user, */ModuleHelper $modulePlugin)
     {
         //$this->user = $user;
         $this->modulePlugin = $modulePlugin;
@@ -43,7 +42,7 @@ class ProgressService extends DomainServiceAbstract
 
     public function getEntityPlugin()
     {
-        return $this->getModulePlugin()->getEntityPlugin();
+        return $this->getModulePlugin()->getEntityHelper();
     }
 
     /**
@@ -81,12 +80,11 @@ class ProgressService extends DomainServiceAbstract
 
     public function writeProgress(ContextInterface $contextProgress)
     {
-        /** @var \Agere\ZfcDataGrid\Service\Progress\DataGridContext $contextProgress */
         $om = $this->getObjectManager();
         $modulePlugin = $this->getModulePlugin();
-        $entityPlugin = $modulePlugin->getEntityPlugin();
+        $entityPlugin = $modulePlugin->getEntityHelper();
 
-        $context = $modulePlugin->setRealContext($contextProgress)->getRealModule();
+        $context = $modulePlugin->setRealContext($contextProgress)->getModule();
         $entity = $entityPlugin->setContext($item = $contextProgress->getItem())->getEntity();
 
         /** @var Progress $progress */
@@ -121,7 +119,7 @@ class ProgressService extends DomainServiceAbstract
     {
         $om = $this->getObjectManager();
         $modulePlugin = $this->getModulePlugin();
-        $entityPlugin = $modulePlugin->getEntityPlugin();
+        $entityPlugin = $modulePlugin->getEntityHelper();
 
         $items = is_array($item) ? $item : [$item];
         $itemNames = [];

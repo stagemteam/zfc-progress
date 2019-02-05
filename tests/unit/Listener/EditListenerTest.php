@@ -1,15 +1,15 @@
 <?php
 /**
- * @category Agere
- * @package Agere_Progress
- * @author Popov Sergiy <popov@agere.com.ua>
+ * @category Stagem
+ * @package Stagem_Progress
+ * @author Popov Sergiy <popov@Stagem.com.ua>
  * @datetime: 17.03.2017 16:54
  */
-namespace AgereTest\Progress\Listener;
+namespace StagemTest\Progress\Listener;
 
-use Agere\ZfcProgress\Service\ContextInterface;
-use Agere\ZfcProgress\Service\ProgressService;
-use AgereTest\Progress\Fake\ProgressContextFake;
+use Stagem\ZfcProgress\Service\ContextInterface;
+use Stagem\ZfcProgress\Service\ProgressService;
+use StagemTest\Progress\Fake\ProgressContextFake;
 use DoctrineModuleTest\ServiceManagerTestCase;
 use Mockery;
 use Zend\ServiceManager\ServiceManager;
@@ -17,8 +17,8 @@ use Zend\Stdlib\Exception;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\Event;
-use Agere\Current\Plugin\Current as CurrentPlugin;
-use Agere\ZfcProgress\Listener\EditListener;
+use Stagem\Current\Plugin\Current as CurrentPlugin;
+use Stagem\ZfcProgress\Listener\EditListener;
 
 class EditListenerTest extends TestCase
 {
@@ -35,7 +35,7 @@ class EditListenerTest extends TestCase
 
     public function getConfig()
     {
-        return include 'module/Agere/Progress/config/module.config.php';
+        return include 'module/Stagem/Progress/config/module.config.php';
     }
 
     public function testAttachEvent()
@@ -58,7 +58,7 @@ class EditListenerTest extends TestCase
 
     public function testStandardWorkflowWriteProgress()
     {
-        $contextMock = Mockery::mock('Agere\Test\Model\Item');
+        $contextMock = Mockery::mock('Stagem\Test\Model\Item');
 
         $eventMock = Mockery::mock(Event::class)
             ->shouldReceive('getParam')
@@ -66,7 +66,7 @@ class EditListenerTest extends TestCase
             ->andReturn($contextMock)
             ->getMock();
 
-        //$contextProgressMock = Mockery::mock('Agere\Test\Progress\TestContext')
+        //$contextProgressMock = Mockery::mock('Stagem\Test\Progress\TestContext')
         //$contextProgressMock = Mockery::mock('alias:' . ContextInterface::class)
         $contextProgressMock = $progressContext = new ProgressContextFake();
             /*->shouldReceive('setEvent')
@@ -96,7 +96,7 @@ class EditListenerTest extends TestCase
 
     public function testWriteProgressMustReturnVoidWhenContextIsPassedButNotRegisteredInConfig()
     {
-        $contextMock = Mockery::mock('Agere\Test\Model\Item');
+        $contextMock = Mockery::mock('Stagem\Test\Model\Item');
 
         $event = Mockery::mock(Event::class);
         $event->shouldReceive('getParam')
@@ -124,10 +124,10 @@ class EditListenerTest extends TestCase
 
     public function testStandardWorkflowOfGetProgressContext()
     {
-        $namespace = 'Agere\Test';
+        $namespace = 'Stagem\Test';
 
-        $contextMock = Mockery::mock('Agere\Test\Model\Item');
-        $contextProgressMock = Mockery::mock('Agere\Test\Progress\TestContext');
+        $contextMock = Mockery::mock('Stagem\Test\Model\Item');
+        $contextProgressMock = Mockery::mock('Stagem\Test\Progress\TestContext');
 
         $currentPluginMock = Mockery::mock(CurrentPlugin::class)
             ->shouldReceive('currentModule')
@@ -137,14 +137,14 @@ class EditListenerTest extends TestCase
 
         $serviceManagerMock = Mockery::mock(ServiceManager::class)
             ->shouldReceive('get')
-            ->with('Agere\Test\Progress\TestContext')
+            ->with('Stagem\Test\Progress\TestContext')
             ->andReturn($contextProgressMock)
             ->getMock();
 
         $config = [
             'progress' => [
                 $namespace => [
-                    'context' => 'Agere\Test\Progress\TestContext',
+                    'context' => 'Stagem\Test\Progress\TestContext',
                 ],
             ],
         ];
@@ -159,11 +159,11 @@ class EditListenerTest extends TestCase
 
     public function testGetProgressContextMustReturnFalseIfContextConfigNotSetOrEmpty()
     {
-        $contextMock = Mockery::mock('Agere\Test\Model\Item');
+        $contextMock = Mockery::mock('Stagem\Test\Model\Item');
         $currentPluginMock = Mockery::mock(CurrentPlugin::class)
             ->shouldReceive('currentModule')
             ->with($contextMock)
-            ->andReturn('Agere\Test')
+            ->andReturn('Stagem\Test')
             ->getMock();
 
         $listener = new EditListener();

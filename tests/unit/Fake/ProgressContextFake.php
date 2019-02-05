@@ -2,19 +2,19 @@
 /**
  * Enter description here...
  *
- * @category Agere
- * @package Agere_<package>
- * @author Popov Sergiy <popov@agere.com.ua>
+ * @category Stagem
+ * @package Stagem_<package>
+ * @author Popov Sergiy <popov@Stagem.com.ua>
  * @datetime: 24.03.2017 22:54
  */
-namespace AgereTest\Progress\Fake;
+namespace StagemTest\Progress\Fake;
 
 use Mockery;
 use Zend\EventManager\Event;
 use Zend\I18n\Translator\TranslatorAwareTrait;
-use Agere\ZfcProgress\Service\ContextInterface;
-use Magere\Users\Service\UserAwareTrait;
-use Magere\Users\Model\Users as User;
+use Stagem\ZfcProgress\Service\ContextInterface;
+use MStagem\Users\Service\UserAwareTrait;
+use MStagem\Users\Model\Users as User;
 
 class ProgressContextFake implements ContextInterface
 {

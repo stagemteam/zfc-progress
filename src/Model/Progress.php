@@ -5,16 +5,16 @@
  * @author Sergiy Popov <popov@agere.com.ua>
  * @datetime: 29.03.2016 23:14
  */
-namespace Agere\ZfcProgress\Model;
+namespace Stagem\ZfcProgress\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Agere\Core\Model\DomainAwareTrait;
-use Magere\Entity\Model\Entity;
-use Magere\Entity\Model\Module;
-use Magere\Users\Model\Users as User;
+use Popov\ZfcCore\Model\DomainAwareTrait;
+use Popov\ZfcEntity\Model\Entity;
+use Popov\ZfcEntity\Model\Module;
+use Popov\ZfcUser\Model\User;
 
 /**
- * @ORM\Entity(repositoryClass="Agere\ZfcProgress\Model\Repository\ProgressRepository")
+ * @ORM\Entity()
  * @ORM\Table(name="progress", indexes={
  *  @ORM\Index(name="FK_ProgressEntityId", columns={"entityId", "itemId"}),
  *  @ORM\Index(name="FK_ProgressContextEntityId", columns={"contextId", "entityId", "itemId"})
@@ -59,7 +59,7 @@ class Progress
      * Executed module context
      *
      * @var Module
-     * @ORM\ManyToOne(targetEntity="Magere\Entity\Model\Module")
+     * @ORM\ManyToOne(targetEntity="Popov\ZfcEntity\Model\Module")
      * @ORM\JoinColumn(name="contextId", referencedColumnName="id")
      */
     protected $context;
@@ -76,14 +76,14 @@ class Progress
      * Registered system entity
      *
      * @var Entity
-     * @ORM\ManyToOne(targetEntity="Magere\Entity\Model\Entity")
+     * @ORM\ManyToOne(targetEntity="Popov\ZfcEntity\Model\Entity")
      * @ORM\JoinColumn(name="entityId", referencedColumnName="id")
      */
     protected $entity;
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="Magere\Users\Model\Users")
+     * @ORM\ManyToOne(targetEntity="Popov\ZfcUser\Model\User")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     protected $user;
