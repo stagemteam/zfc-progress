@@ -17,13 +17,18 @@
       "role": "Developer"
     }
   ],
-  "minimum-stability": "stable",
   "require": {
     "php": ">=5.6 || >=7.0"
   },
   "autoload": {
     "psr-4": {
       "Stagem\\ZfcProgress\\": "src/"
+    }
+  },
+  "extra": {
+    "zf": {
+      "component": "Stagem\\ZfcProgress",
+      "config-provider": "Stagem\\ZfcProgress\\ConfigProvider"
     }
   }
 }
