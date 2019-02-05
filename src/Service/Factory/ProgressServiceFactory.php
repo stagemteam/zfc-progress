@@ -7,24 +7,19 @@
  * @author Popov Sergiy <popov@agere.com.ua>
  * @datetime: 04.02.15 10:30
  */
-namespace Agere\ZfcProgress\Service\Factory;
+namespace Stagem\ZfcProgress\Service\Factory;
 
-use Interop\Container\ContainerInterface;
-use Zend\Mvc\Controller\PluginManager;
-use Agere\ZfcProgress\Service\ProgressService;
-use Magere\Entity\Controller\Plugin\ModulePlugin;
+use Popov\ZfcEntity\Helper\ModuleHelper;
+use Psr\Container\ContainerInterface;
+use Stagem\ZfcProgress\Service\ProgressService;
 
 class ProgressServiceFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        /** @var PluginManager $cpm */
-        $cpm = $container->get('ControllerPluginManager');
-        //$userService = $container->get('UserService');
-        //$user = $cpm->get('user');
-        /** @var ModulePlugin $modulePlugin */
-        $modulePlugin = $cpm->get('module');
+        /** @var ModuleHelper $moduleHelper */
+        $moduleHelper = $container->get(ModuleHelper::class);
 
-        return (new ProgressService($modulePlugin));
+        return (new ProgressService($moduleHelper));
     }
 }

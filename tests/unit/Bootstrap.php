@@ -1,5 +1,5 @@
 <?php
-namespace AgereTest\Progress;
+namespace StagemTest\Progress;
 
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
@@ -32,8 +32,8 @@ class Bootstrap
                 'module_paths' => $zf2ModulePaths,
             ],
             'modules' => [
-                'Agere\ZfcProgress',
-                'Magere\Users',
+                'Stagem\ZfcProgress',
+                'Popov\User',
             ],
         ];
 

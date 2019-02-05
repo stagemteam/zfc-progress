@@ -2,12 +2,12 @@
 /**
  * Enter description here...
  *
- * @category Agere
- * @package Agere_<package>
- * @author Popov Sergiy <popov@agere.com.ua>
+ * @category Stagem
+ * @package Stagem_<package>
+ * @author Popov Sergiy <popov@Stagem.com.ua>
  * @datetime: 24.03.2017 23:04
  */
-namespace AgereTest\Progress\Fake;
+namespace StagemTest\Progress\Fake;
 
 class ServiceStub
 {
