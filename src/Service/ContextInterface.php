@@ -50,11 +50,4 @@ interface ContextInterface extends UserAwareInterface, TranslatorAwareInterface
      */
     public function getMessage();
 
-    /**
-     * Progress description
-     *
-     * @return string
-     */
-    public function getDescription();
-
 }

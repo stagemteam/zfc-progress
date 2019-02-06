@@ -1,23 +1,29 @@
 <?php
+
 namespace Stagem\ZfcProgress\Service;
 
 use Popov\ZfcEntity\Helper\ModuleHelper;
 use Popov\ZfcCore\Service\DomainServiceAbstract;
 use Stagem\ZfcProgress\Model\Repository\ProgressRepository;
 use Stagem\ZfcProgress\Model\Progress;
-use Popov\ZfcEntity\Model\Module;
 use Popov\ZfcEntity\Model\Entity;
+use Popov\ZfcUser\Model\User;
 
 class ProgressService extends DomainServiceAbstract
 {
     protected $entity = Progress::class;
 
-    //protected $user;
+    /**
+     * @var User
+     */
+    protected $user;
 
-    /** @var ModuleHelper */
+    /**
+     * @var ModuleHelper
+     */
     protected $modulePlugin;
 
-    public function __construct(/*$user, */ModuleHelper $modulePlugin)
+    public function __construct(/*User $user, */ModuleHelper $modulePlugin)
     {
         //$this->user = $user;
         $this->modulePlugin = $modulePlugin;
@@ -55,7 +61,6 @@ class ProgressService extends DomainServiceAbstract
     {
         $items = is_array($item) ? $item : [$item];
         $entities = $this->getEntities($items);
-
         /** @var ProgressRepository $repository */
         $repository = $this->getRepository();
 
@@ -71,7 +76,6 @@ class ProgressService extends DomainServiceAbstract
     public function getProgressByContext($item, $context)
     {
         $entity = $this->getEntities($item);
-
         /** @var ProgressRepository $repository */
         $repository = $this->getRepository();
 
@@ -83,9 +87,9 @@ class ProgressService extends DomainServiceAbstract
         $om = $this->getObjectManager();
         $modulePlugin = $this->getModulePlugin();
         $entityPlugin = $modulePlugin->getEntityHelper();
-
         $context = $modulePlugin->setRealContext($contextProgress)->getModule();
         $entity = $entityPlugin->setContext($item = $contextProgress->getItem())->getEntity();
+
 
         /** @var Progress $progress */
         $progress = $this->getObjectModel();
@@ -95,7 +99,6 @@ class ProgressService extends DomainServiceAbstract
             }
             $om->flush();
         }
-
         $progress->setMessage($contextProgress->getMessage())
             ->setItemId($item->getId())
             ->setUser($contextProgress->getUser())
@@ -104,10 +107,9 @@ class ProgressService extends DomainServiceAbstract
             ->setCreatedAt(new \DateTime('now'))
             ->setSnippet(serialize($item))
             ->setExtra($contextProgress->getExtra());
-
         $om->persist($progress);
-        #$om->flush();
 
+        #$om->flush();
         return $progress;
     }
 
@@ -120,13 +122,11 @@ class ProgressService extends DomainServiceAbstract
         $om = $this->getObjectManager();
         $modulePlugin = $this->getModulePlugin();
         $entityPlugin = $modulePlugin->getEntityHelper();
-
         $items = is_array($item) ? $item : [$item];
         $itemNames = [];
         foreach ($items as $item) {
             $itemNames[] = $entityPlugin->setContext($item)->getContext();
         }
-
         $entities = $om->getRepository(Entity::class)->findBy(['namespace' => $itemNames]);
 
         return $entities;

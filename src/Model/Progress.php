@@ -7,14 +7,16 @@
  */
 namespace Stagem\ZfcProgress\Model;
 
+use GraphQL\Doctrine\Annotation as API;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Popov\ZfcCore\Model\DomainAwareTrait;
 use Popov\ZfcEntity\Model\Entity;
 use Popov\ZfcEntity\Model\Module;
 use Popov\ZfcUser\Model\User;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Stagem\ZfcProgress\Model\Repository\ProgressRepository")
  * @ORM\Table(name="progress", indexes={
  *  @ORM\Index(name="FK_ProgressEntityId", columns={"entityId", "itemId"}),
  *  @ORM\Index(name="FK_ProgressContextEntityId", columns={"contextId", "entityId", "itemId"})
@@ -45,7 +47,7 @@ class Progress
 
     /**
      * @var array
-     * @ORM\Column(name="extra", type="json_array")
+     * @ORM\Column(name="extra", type="json")
      */
     protected $extra;
 
@@ -84,7 +86,7 @@ class Progress
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="Popov\ZfcUser\Model\User")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="userId", referencedColumnName="id", nullable=true)
      */
     protected $user;
 
@@ -146,9 +148,10 @@ class Progress
     }
 
     /**
+     * @API\Field(type="Stagem\GraphQL\Type\JsonType")
      * @return array
      */
-    public function getExtra()
+    public function getExtra(): array
     {
         return $this->extra;
     }
@@ -157,7 +160,7 @@ class Progress
      * @param array $extra
      * @return Progress
      */
-    public function setExtra($extra)
+    public function setExtra(array $extra): Progress
     {
         $this->extra = $extra;
 
