@@ -26,6 +26,10 @@ class Progress
 {
     use DomainAwareTrait;
 
+    const MNEMO = 'progress';
+
+    const TABLE = 'progress';
+
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false, options={"unsigned":true})
@@ -56,6 +60,12 @@ class Progress
      * @ORM\Column(name="message", type="text", nullable=false)
      */
     protected $message;
+
+    /**
+     * @var string
+     * @ORM\Column(name="description", type="text", nullable=false)
+     */
+    protected $description;
 
     /**
      * Executed module context
@@ -182,6 +192,25 @@ class Progress
     public function setMessage($message)
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Progress
+     */
+    public function setDescription(string $description): Progress
+    {
+        $this->description = $description;
 
         return $this;
     }

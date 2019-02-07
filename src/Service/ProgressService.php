@@ -100,6 +100,7 @@ class ProgressService extends DomainServiceAbstract
             $om->flush();
         }
         $progress->setMessage($contextProgress->getMessage())
+            ->setDescription($contextProgress->getDescription())
             ->setItemId($item->getId())
             ->setUser($contextProgress->getUser())
             ->setContext($context)
