@@ -7,6 +7,7 @@
  */
 namespace Stagem\ZfcProgress\Model;
 
+use DateTime;
 use GraphQL\Doctrine\Annotation as API;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -26,7 +27,7 @@ class Progress
 {
     use DomainAwareTrait;
 
-    const MNEMO = 'progress';
+    const MNEMO = 'statusProgress';
 
     const TABLE = 'progress';
 
@@ -38,7 +39,7 @@ class Progress
     protected $id;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @ORM\Column(name="createdAt", type="datetime")
      */
     protected $createdAt;
@@ -120,18 +121,18 @@ class Progress
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return Progress
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(DateTime $createdAt): Progress
     {
         $this->createdAt = $createdAt;
 
