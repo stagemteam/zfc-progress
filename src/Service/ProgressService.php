@@ -99,15 +99,23 @@ class ProgressService extends DomainServiceAbstract
             }
             $om->flush();
         }
+
+        $createdAt = new \DateTime('now');
+        $user = $contextProgress->getUser();
+
+        $extra = $contextProgress->getExtra();
+        $status = "{\"value\": \"new\", \"date\": \"" . $createdAt->format("Y-m-d H:i:s") . "\", \"modifiedBy\": \"" . $user->getFirstName() . "\"}";
+        $extra['status'] = json_decode($status, true);
+
         $progress->setMessage($contextProgress->getMessage())
             ->setDescription($contextProgress->getDescription())
             ->setItemId($item->getId())
-            ->setUser($contextProgress->getUser())
+            ->setUser($user)
             ->setContext($context)
             ->setEntity($entity)
-            ->setCreatedAt(new \DateTime('now'))
+            ->setCreatedAt($createdAt)
             ->setSnippet(serialize($item))
-            ->setExtra($contextProgress->getExtra());
+            ->setExtra($extra);
         $om->persist($progress);
 
         #$om->flush();
