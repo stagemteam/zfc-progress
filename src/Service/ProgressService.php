@@ -2,6 +2,7 @@
 
 namespace Stagem\ZfcProgress\Service;
 
+use DateTime;
 use Popov\ZfcEntity\Helper\ModuleHelper;
 use Popov\ZfcCore\Service\DomainServiceAbstract;
 use Stagem\ZfcProgress\Model\Repository\ProgressRepository;
@@ -90,7 +91,6 @@ class ProgressService extends DomainServiceAbstract
         $context = $modulePlugin->setRealContext($contextProgress)->getModule();
         $entity = $entityPlugin->setContext($item = $contextProgress->getItem())->getEntity();
 
-
         /** @var Progress $progress */
         $progress = $this->getObjectModel();
         if (!$item->getId()) { // @todo Щоб уникнути небажаного flush реалізувати single_table або розібратись у Statusable (від Taggable, Sortable etc.)
@@ -100,12 +100,10 @@ class ProgressService extends DomainServiceAbstract
             $om->flush();
         }
 
-        $createdAt = new \DateTime('now');
+        $createdAt = new DateTime('now');
         $user = $contextProgress->getUser();
 
         $extra = $contextProgress->getExtra();
-        $status = "{\"value\": \"new\", \"date\": \"" . $createdAt->format("Y-m-d H:i:s") . "\", \"modifiedBy\": \"" . $user->getFirstName() . "\"}";
-        $extra['status'] = json_decode($status, true);
 
         $progress->setMessage($contextProgress->getMessage())
             ->setDescription($contextProgress->getDescription())
@@ -116,7 +114,10 @@ class ProgressService extends DomainServiceAbstract
             ->setCreatedAt($createdAt)
             ->setSnippet(serialize($item))
             ->setExtra($extra);
+
         $om->persist($progress);
+
+        $this->getEventManager()->trigger('write', $progress, ['context' => $this, 'item' => $item]);
 
         #$om->flush();
         return $progress;

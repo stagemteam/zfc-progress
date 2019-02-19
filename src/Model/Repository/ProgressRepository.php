@@ -66,16 +66,16 @@ class ProgressRepository extends EntityRepository {
             ->leftJoin($this->_alias . '.entity', 'entity')
             ->leftJoin($this->_alias . '.context', 'module');
 
-        /*$qb->where(
+        $qb->where(
             $qb->expr()->andX(
                 $qb->expr()->in($this->_alias . '.context', '?1'),
                 $qb->expr()->in($this->_alias . '.entity', '?2')
             )
-        );*/
+        );
 
         $qb->orderBy($this->_alias . '.createdAt', 'ASC');
 
-        //$qb->setParameters([1 => $context, 2 => $entity]);
+        $qb->setParameters([1 => $context, 2 => $entity]);
 
         return $qb;
     }

@@ -15,6 +15,7 @@ use Popov\ZfcCore\Model\DomainAwareTrait;
 use Popov\ZfcEntity\Model\Entity;
 use Popov\ZfcEntity\Model\Module;
 use Popov\ZfcUser\Model\User;
+use Stagem\ZfcStatus\Model\Status;
 
 /**
  * @ORM\Entity(repositoryClass="Stagem\ZfcProgress\Model\Repository\ProgressRepository")
@@ -67,6 +68,19 @@ class Progress
      * @ORM\Column(name="description", type="text", nullable=false)
      */
     protected $description;
+
+    /**
+     * @var DateTime
+     * @ORM\Column(name="statusedAt", type="datetime", nullable=true)
+     */
+    protected $statusedAt;
+
+    /**
+     * @var Status
+     * @ORM\ManyToOne(targetEntity="Stagem\ZfcStatus\Model\Status")
+     * @ORM\JoinColumn(name="statusId", referencedColumnName="id", nullable=true)
+     */
+    protected $status;
 
     /**
      * Executed module context
@@ -212,6 +226,44 @@ class Progress
     public function setDescription(string $description): Progress
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getStatusedAt(): DateTime
+    {
+        return $this->statusedAt;
+    }
+
+    /**
+     * @param DateTime $statusedAt
+     * @return Progress
+     */
+    public function setStatusedAt(DateTime $statusedAt): Progress
+    {
+        $this->statusedAt = $statusedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return null|Status
+     */
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param Status $status
+     * @return Progress
+     */
+    public function setStatus(Status $status): Progress
+    {
+        $this->status = $status;
 
         return $this;
     }
