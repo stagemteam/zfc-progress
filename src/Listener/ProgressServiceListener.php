@@ -41,11 +41,11 @@ class ProgressServiceListener implements ObjectManagerAwareInterface
         if (method_exists($item, 'getStatus')&& !$item->getId() && !$item->getStatus()) {
             $om = $this->getObjectManager();
             $entity = $this->entityHelper->setContext($item)->getEntity();
-
             $status = $om->getRepository(Status::class)->findOneBy(['isDefault' => 1, 'entity' => $entity]);
-
-            $item->setStatus($status);
-            $item->setStatusedAt(new DateTime('now'));
+            if ($status) {
+                $item->setStatus($status);
+                $item->setStatusedAt(new DateTime('now'));
+            }
         }
     }
 }
