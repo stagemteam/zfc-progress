@@ -1,3 +1,4 @@
+
 # ZF2 Progress Module
 
 This module is part of Stagem ecosystem and main goal is logging any change registered in `Context`.
@@ -140,5 +141,3 @@ Also you simply can register custom event name if pre registered is inopportune:
     ]
 ],
 ```
-
-
