@@ -231,9 +231,9 @@ class Progress
     }
 
     /**
-     * @return DateTime
+     * @return null|DateTime
      */
-    public function getStatusedAt(): DateTime
+    public function getStatusedAt(): ?DateTime
     {
         return $this->statusedAt;
     }

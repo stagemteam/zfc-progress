@@ -42,14 +42,14 @@ class ProgressService extends DomainServiceAbstract
         return $this->user;
     }*/
 
-    public function getModulePlugin()
+    public function getModuleHelper()
     {
         return $this->modulePlugin;
     }
 
-    public function getEntityPlugin()
+    public function getEntityHelper()
     {
-        return $this->getModulePlugin()->getEntityHelper();
+        return $this->getModuleHelper()->getEntityHelper();
     }
 
     /**
@@ -86,14 +86,12 @@ class ProgressService extends DomainServiceAbstract
     public function writeProgress(ContextInterface $contextProgress)
     {
         $om = $this->getObjectManager();
-        $modulePlugin = $this->getModulePlugin();
+        $modulePlugin = $this->getModuleHelper();
         $entityPlugin = $modulePlugin->getEntityHelper();
         $context = $modulePlugin->setRealContext($contextProgress)->getModule();
         $entity = $entityPlugin->setContext($item = $contextProgress->getItem())->getEntity();
 
-        /** @var Progress $progress */
-        $progress = $this->getObjectModel();
-        if (!$item->getId()) { // @todo Щоб уникнути небажаного flush реалізувати single_table або розібратись у Statusable (від Taggable, Sortable etc.)
+        if ($this->getEntityHelper()->isNew($item)) { // @todo Щоб уникнути небажаного flush реалізувати single_table або розібратись у Statusable (від Taggable, Sortable etc.)
             if (!$om->contains($item)) {
                 $om->persist($item);
             }
@@ -101,19 +99,18 @@ class ProgressService extends DomainServiceAbstract
         }
 
         $createdAt = new DateTime('now');
-        $user = $contextProgress->getUser();
 
-        $extra = $contextProgress->getExtra();
-
+        /** @var Progress $progress */
+        $progress = $this->getObjectModel();
         $progress->setMessage($contextProgress->getMessage())
             ->setDescription($contextProgress->getDescription())
             ->setItemId($item->getId())
-            ->setUser($user)
+            ->setUser($contextProgress->getUser())
             ->setContext($context)
             ->setEntity($entity)
             ->setCreatedAt($createdAt)
             ->setSnippet(serialize($item))
-            ->setExtra($extra);
+            ->setExtra($contextProgress->getExtra());
 
         $om->persist($progress);
 
@@ -130,7 +127,7 @@ class ProgressService extends DomainServiceAbstract
     protected function getEntities($item)
     {
         $om = $this->getObjectManager();
-        $modulePlugin = $this->getModulePlugin();
+        $modulePlugin = $this->getModuleHelper();
         $entityPlugin = $modulePlugin->getEntityHelper();
         $items = is_array($item) ? $item : [$item];
         $itemNames = [];
