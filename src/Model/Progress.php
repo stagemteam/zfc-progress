@@ -326,7 +326,7 @@ class Progress
     }
 
     /**
-     * @return User
+     * @return null|User
      */
     public function getUser()
     {
@@ -334,10 +334,10 @@ class Progress
     }
 
     /**
-     * @param User $user
+     * @param null|User $user
      * @return Progress
      */
-    public function setUser($user)
+    public function setUser(?User $user)
     {
         $this->user = $user;
 
