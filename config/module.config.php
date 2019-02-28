@@ -5,6 +5,10 @@ return [
 
     'event_manager' => require 'listener.config.php',
 
+    'actions' => [
+        'progress' => __NAMESPACE__ . '\Action',
+    ],
+
     'service_manager' => [
         'aliases' => [
             'Progress' => Model\Progress::class,

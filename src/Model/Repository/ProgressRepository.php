@@ -9,6 +9,13 @@ class ProgressRepository extends EntityRepository {
 
     protected $_alias = 'statusProgress';
 
+    public function getAllProgress() {
+        $qb = $this->createQueryBuilder($this->_alias)
+            ->leftJoin($this->_alias . '.context', 'module');
+
+        return $qb;
+    }
+
     public function getItemProgress($item, $entity) {
         return $this->getItemsProgress([$item], [$entity]);
     }
