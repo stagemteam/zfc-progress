@@ -53,6 +53,14 @@ class ProgressGrid extends AbstractGrid
 
         $this->add([
             'name' => 'Select',
+            'construct' => ['id', $this->id],
+            'label' => 'Id',
+            'translation_enabled' => true,
+            'width' => 1,
+        ]);
+
+        $this->add([
+            'name' => 'Select',
             'construct' => ['message', $this->id],
             'label' => 'Title',
             'translation_enabled' => true,

@@ -334,10 +334,10 @@ class Progress
     }
 
     /**
-     * @param User $user
+     * @param null|User $user
      * @return Progress
      */
-    public function setUser($user)
+    public function setUser(?User $user)
     {
         $this->user = $user;
 
