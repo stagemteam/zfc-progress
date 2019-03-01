@@ -326,7 +326,7 @@ class Progress
     }
 
     /**
-     * @return User
+     * @return User|null
      */
     public function getUser()
     {
