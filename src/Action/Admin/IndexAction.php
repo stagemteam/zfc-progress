@@ -75,24 +75,9 @@ class IndexAction extends AbstractAction
     {
         $route = $request->getAttribute(RouteMatch::class);
 
-        $contextMnemo = isset($request->getParsedBody()['filters']) ?
-            $request->getParsedBody()['filters']['contextMnemo'] : null;
-
-        $entityMnemo = isset($request->getParsedBody()['filters']) ?
-            $request->getParsedBody()['filters']['entityMnemo'] : null;
-
-        if ($contextMnemo != null && $entityMnemo != null) {
-            $context = $this->moduleService->getRepository()->findOneBy(['mnemo' => $contextMnemo]);
-            $entity = $this->entityService->getRepository()->findOneBy(['mnemo' => $entityMnemo]);
-
-            $notifications = $this->progressService->getObjectManager()
-                ->getRepository(Progress::class)
-                ->getItemsProgressByContextEntity($context, $entity);
-        } else {
-            $notifications = $this->progressService
-                ->getRepository()
-                ->getAllProgress();
-        }
+        $notifications = $this->progressService
+            ->getRepository()
+            ->getAllProgress();
 
         $this->progressGrid->init();
         $dataGrid = $this->progressGrid->getDataGrid();

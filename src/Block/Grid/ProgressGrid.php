@@ -14,12 +14,17 @@
  */
 
 namespace Stagem\ZfcProgress\Block\Grid;
+use DoctrineModule\Persistence\ObjectManagerAwareInterface;
+use DoctrineModule\Persistence\ProvidesObjectManager;
 use Popov\ZfcDataGrid\Block\AbstractGrid;
+use Popov\ZfcEntity\Model\Entity;
 use Popov\ZfcEntity\Model\Module;
 use Stagem\ZfcProgress\Model\Progress;
 
-class ProgressGrid extends AbstractGrid
+class ProgressGrid extends AbstractGrid implements ObjectManagerAwareInterface
 {
+    use ProvidesObjectManager;
+
     protected $createButtonTitle = '';
 
     protected $backButtonTitle = '';
@@ -28,7 +33,9 @@ class ProgressGrid extends AbstractGrid
 
     protected $entity = Progress::class;
 
-    protected $module_id = 'module';
+    protected $moduleId = 'module';
+
+    protected $entityId = Entity::MNEMO;
 
     public function init()
     {
@@ -109,14 +116,30 @@ class ProgressGrid extends AbstractGrid
 
         $this->add([
             'name' => 'Select',
-            'construct' => ['mnemo', $this->module_id],
-            'label' => 'Description',
+            'construct' => ['mnemo', $this->moduleId],
+            'label' => 'Module',
             'width' => 1,
             'renderer_parameters' => [
                 ['editable', true, 'jqGrid'],
                 ['editrules', ['required' => true], 'jqGrid'],
             ],
+            //'filter_default_value' => 'status',
+            'filter_select_options' => [
+                'options' => [
+                    'object_manager' => $this->getObjectManager(),
+                    'target_class' => Module::class,
+                    'identifier' => 'id',
+                    'property' => 'mnemo',
+                    'is_method' => false,
+                    'option_attributes' => [
+                        'multiple' => true,
+                        'size' => 4,
+                    ],
+                ],
+            ],
         ]);
+
+        //$column->setFilterActive($filter->getDisplayColumnValue());
 
         return $grid;
     }
