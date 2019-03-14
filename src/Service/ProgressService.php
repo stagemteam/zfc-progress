@@ -52,6 +52,13 @@ class ProgressService extends DomainServiceAbstract
         return $this->getModuleHelper()->getEntityHelper();
     }
 
+    public function getAllProgress()
+    {
+        $repository = $this->getRepository();
+
+        return $repository->getAllProgress();
+    }
+
     /**
      * Get progress for one or several items
      *

@@ -1,10 +1,11 @@
+
 # ZF2 Progress Module
 
 This module is part of Stagem ecosystem and main goal is logging any change registered in `Context`.
 
 ## Requirements
-* `Stagem\ZfcEntity` module
-* `Stagem\ZfcUser` module
+* `Popov\ZfcEntity` module
+* `Popov\ZfcUser` module
 
 Logging principle is based on execution context. Conditionally realisation can describe follows (for different modules):
  - item status is changing in `Status Context`;
