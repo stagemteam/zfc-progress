@@ -5,6 +5,7 @@ namespace Stagem\ZfcProgress\Service;
 use DateTime;
 use Popov\ZfcEntity\Helper\ModuleHelper;
 use Popov\ZfcCore\Service\DomainServiceAbstract;
+use Stagem\ZfcProgress\Model\ProgressInterface;
 use Stagem\ZfcProgress\Model\Repository\ProgressRepository;
 use Stagem\ZfcProgress\Model\Progress;
 use Popov\ZfcEntity\Model\Entity;
@@ -12,7 +13,8 @@ use Popov\ZfcUser\Model\User;
 
 class ProgressService extends DomainServiceAbstract
 {
-    protected $entity = Progress::class;
+    //protected $entity = Progress::class;
+    protected $entity = ProgressInterface::class;
 
     /**
      * @var User
@@ -112,16 +114,20 @@ class ProgressService extends DomainServiceAbstract
         $progress->setMessage($contextProgress->getMessage())
             ->setDescription($contextProgress->getDescription())
             ->setItemId($item->getId())
-            ->setUser($contextProgress->getUser())
+            ->setCreatedBy($contextProgress->getUser())
             ->setContext($context)
             ->setEntity($entity)
             ->setCreatedAt($createdAt)
             ->setSnippet(serialize($item))
             ->setExtra($contextProgress->getExtra());
 
-        $om->persist($progress);
+        //$om->persist($progress);
 
-        $this->getEventManager()->trigger('write', $progress, ['context' => $this, 'item' => $item]);
+        $this->getEventManager()->trigger('write', $progress, [
+            'context' => $this,
+            'item' => $item,
+            'contextProgress' => $contextProgress
+        ]);
 
         #$om->flush();
         return $progress;

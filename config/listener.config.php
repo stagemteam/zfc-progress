@@ -21,13 +21,13 @@ return [
             'identifier' => '*',
             'priority' => 100,
         ],
-        [
+        /*[
             'listener' => Stagem\ZfcProgress\Listener\ProgressServiceListener::class,
             'method' => 'setDefaultStatus',
             //'event' => ['write'],
             'event' => 'write',
             'identifier' => Stagem\ZfcProgress\Service\ProgressService::class,
             'priority' => 100,
-        ],
+        ],*/
     ],
 ];

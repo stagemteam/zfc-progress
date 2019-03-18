@@ -1,6 +1,9 @@
 <?php
 namespace Stagem\ZfcProgress;
 
+use Stagem\ZfcProgress\Model\Progress;
+use Stagem\ZfcProgress\Model\ProgressInterface;
+
 return [
 
     'event_manager' => require 'listener.config.php',
@@ -47,6 +50,13 @@ return [
                     __NAMESPACE__ . '\Model' => __NAMESPACE__ . '_driver'
                 ]
             ]
+        ],
+        'entity_resolver' => [
+            'orm_default' => [
+                'resolvers' => [
+                    ProgressInterface::class => Model\Progress::class,
+                ],
+            ],
         ],
     ],
 ];

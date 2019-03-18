@@ -35,7 +35,7 @@ class ProgressServiceListener implements ObjectManagerAwareInterface
         //$this->statusHelper = $statusHelper;
     }
 
-    public function setDefaultStatus($e)
+    /*public function setDefaultStatus($e)
     {
         $item = $e->getTarget();
         if (method_exists($item, 'getStatus')&& !$item->getId() && !$item->getStatus()) {
@@ -47,5 +47,5 @@ class ProgressServiceListener implements ObjectManagerAwareInterface
                 $item->setStatusedAt(new DateTime('now'));
             }
         }
-    }
+    }*/
 }

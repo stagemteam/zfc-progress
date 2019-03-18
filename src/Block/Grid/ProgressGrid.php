@@ -29,7 +29,7 @@ class ProgressGrid extends AbstractGrid implements ObjectManagerAwareInterface
 
     protected $backButtonTitle = '';
 
-    protected $id = Progress::MNEMO;
+    //protected $id = Progress::MNEMO;
 
     protected $entity = Progress::class;
 
@@ -54,13 +54,13 @@ class ProgressGrid extends AbstractGrid implements ObjectManagerAwareInterface
 
         $this->add([
             'name' => 'Select',
-            'construct' => ['id', $this->id],
+            'construct' => ['id', $grid->getId()],
             'identity' => true,
         ]);
 
         $this->add([
             'name' => 'Select',
-            'construct' => ['id', $this->id],
+            'construct' => ['id', $grid->getId()],
             'label' => 'Id',
             'translation_enabled' => true,
             'width' => 1,
@@ -68,7 +68,7 @@ class ProgressGrid extends AbstractGrid implements ObjectManagerAwareInterface
 
         $this->add([
             'name' => 'Select',
-            'construct' => ['message', $this->id],
+            'construct' => ['message', $grid->getId()],
             'label' => 'Title',
             'translation_enabled' => true,
             'width' => 1,
@@ -79,7 +79,7 @@ class ProgressGrid extends AbstractGrid implements ObjectManagerAwareInterface
 
         $this->add([
             'name' => 'Select',
-            'construct' => ['description', $this->id],
+            'construct' => ['description', $grid->getId()],
             'label' => 'Description',
             'width' => 3,
             'renderer_parameters' => [
@@ -90,7 +90,7 @@ class ProgressGrid extends AbstractGrid implements ObjectManagerAwareInterface
 
         $this->add([
             'name' => 'Select',
-            'construct' => ['extra', $this->id],
+            'construct' => ['extra', $grid->getId()],
             'label' => 'Extra',
             'width' => 1,
             'renderer_parameters' => [
@@ -101,7 +101,7 @@ class ProgressGrid extends AbstractGrid implements ObjectManagerAwareInterface
 
         $this->add([
             'name' => 'Select',
-            'construct' => ['createdAt', $this->id],
+            'construct' => ['createdAt', $grid->getId()],
             'label' => 'Date Create',
             'width' => 1,
             'renderer_parameters' => [
@@ -128,7 +128,7 @@ class ProgressGrid extends AbstractGrid implements ObjectManagerAwareInterface
                 'options' => [
                     'object_manager' => $this->getObjectManager(),
                     'target_class' => Module::class,
-                    'identifier' => 'id',
+                    'identifier' => 'mnemo',
                     'property' => 'mnemo',
                     'is_method' => false,
                     'option_attributes' => [
