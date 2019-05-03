@@ -47,7 +47,7 @@ class ProgressGrid extends AbstractGrid implements ObjectManagerAwareInterface
         $rendererOptions['navGridDel'] = true;
         //$rendererOptions['navGridSearch'] = true;
         //$rendererOptions['inlineNavEdit'] = true;
-        $rendererOptions['inlineNavAdd'] = true;
+        //$rendererOptions['inlineNavAdd'] = true;
         $rendererOptions['inlineNavCancel'] = true;
         $rendererOptions['inlineNavRefresh'] = true;
         $grid->setToolbarTemplateVariables($rendererOptions);
