@@ -29,19 +29,20 @@ class ProgressGrid extends AbstractGrid implements ObjectManagerAwareInterface
 
     protected $backButtonTitle = '';
 
-    //protected $id = Progress::MNEMO;
+    protected $id = Progress::MNEMO;
 
-    protected $entity = Progress::class;
+    //protected $entity = Progress::class;
 
-    protected $moduleId = 'module';
+    //protected $moduleId = Module::MNEMO;
 
-    protected $entityId = Entity::MNEMO;
+    //protected $entityId = Entity::MNEMO;
 
     public function init()
     {
+
         $grid = $this->getDataGrid();
-        //$grid->setId($this->mnemo);
-        $grid->setTitle('Price rules');
+        $grid->setTitle('Progress');
+
         $rendererOptions = $grid->getToolbarTemplateVariables();
         $rendererOptions['navGridEdit'] = true;
         $rendererOptions['navGridDel'] = true;
@@ -116,7 +117,7 @@ class ProgressGrid extends AbstractGrid implements ObjectManagerAwareInterface
 
         $this->add([
             'name' => 'Select',
-            'construct' => ['mnemo', $this->moduleId],
+            'construct' => ['mnemo', Module::MNEMO],
             'label' => 'Module',
             'width' => 1,
             'renderer_parameters' => [
