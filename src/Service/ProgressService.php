@@ -129,7 +129,7 @@ class ProgressService extends DomainServiceAbstract
             'contextProgress' => $contextProgress
         ]);
 
-        #$om->flush();
+        //$om->flush();
         return $progress;
     }
 
